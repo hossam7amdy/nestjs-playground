@@ -4,14 +4,14 @@ import { readFileSync } from 'node:fs';
 import { parse } from 'dotenv';
 
 import type { ConfigModuleOptions, EnvConfig } from './interfaces';
-import { CONFIG_MODULE_OPTIONS } from './constants';
+import { MODULE_OPTIONS_TOKEN } from './config.module-definition';
 
 @Injectable()
 export class ConfigService {
   private readonly envConfig: EnvConfig;
 
   constructor(
-    @Inject(CONFIG_MODULE_OPTIONS)
+    @Inject(MODULE_OPTIONS_TOKEN)
     options: ConfigModuleOptions,
   ) {
     const filePath = `.env.${process.env.NODE_ENV || 'development'}`;
