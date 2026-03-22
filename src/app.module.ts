@@ -1,14 +1,21 @@
 import { Logger, Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { CatsModule } from './cats/cats.module';
+import { ConfigModule, ConfigType } from '@nestjs/config';
+import appConfig from './config/app.config';
+import databaseConfig from './config/database.config';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+      load: [appConfig, databaseConfig],
+    }),
     MongooseModule.forRootAsync({
-      useFactory: () => {
+      useFactory: ({ mongo }: ConfigType<typeof databaseConfig>) => {
         const logger = new Logger('MongooseConnection');
         return {
-          uri: 'mongodb://localhost:27017/nestjs-playground',
+          uri: mongo.uri,
           onConnectionCreate(connection) {
             connection.on('connected', () =>
               logger.log(`Mongoose connected to ${connection.name}`),
@@ -29,6 +36,7 @@ import { CatsModule } from './cats/cats.module';
           },
         };
       },
+      inject: [databaseConfig.KEY],
     }),
     CatsModule,
   ],
