@@ -4,6 +4,7 @@ import { CatsController } from './cats.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { CatSchema } from './schemas/cats.schema';
 import { Cat } from './schemas/cats.schema';
+import { CatsTasks } from './cats.tasks';
 
 @Module({
   imports: [
@@ -15,6 +16,6 @@ import { Cat } from './schemas/cats.schema';
     ]),
   ],
   controllers: [CatsController],
-  providers: [CatsService],
+  providers: [CatsService, CatsTasks],
 })
 export class CatsModule {}

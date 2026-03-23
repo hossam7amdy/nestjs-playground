@@ -4,6 +4,7 @@ import { CatsModule } from './cats/cats.module';
 import { ConfigModule, ConfigType } from '@nestjs/config';
 import appConfig from './config/app.config';
 import databaseConfig from './config/database.config';
+import { ScheduleModule } from '@nestjs/schedule';
 
 @Module({
   imports: [
@@ -11,6 +12,7 @@ import databaseConfig from './config/database.config';
       isGlobal: true,
       load: [appConfig, databaseConfig],
     }),
+    ScheduleModule.forRoot(),
     MongooseModule.forRootAsync({
       useFactory: ({ mongo }: ConfigType<typeof databaseConfig>) => {
         const logger = new Logger('MongooseConnection');
