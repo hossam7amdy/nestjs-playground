@@ -1,10 +1,9 @@
 {
-  "name": "nestjs-async-providers",
+  "name": "nestjs-playground",
   "version": "0.0.1",
-  "description": "",
-  "author": "",
-  "private": true,
-  "license": "UNLICENSED",
+  "description": "NestJS Playground",
+  "author": "Hossam Hamdy <hossamhamdy117@gmail.com>",
+  "license": "MIT",
   "scripts": {
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
@@ -31,10 +30,8 @@
     "class-validator": "^0.15.1",
     "cron": "^4.4.0",
     "mongoose": "^9.3.1",
-    "pg": "^8.20.0",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1",
-    "typeorm": "^0.3.28",
     "zod": "^4.3.6"
   },
   "devDependencies": {
