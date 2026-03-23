@@ -5,11 +5,13 @@ import { ConfigModule, ConfigType } from '@nestjs/config';
 import appConfig from './config/app.config';
 import databaseConfig from './config/database.config';
 import { ScheduleModule } from '@nestjs/schedule';
+import validateEnv from './config/env.validator';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
+      validate: validateEnv,
       load: [appConfig, databaseConfig],
     }),
     ScheduleModule.forRoot(),
