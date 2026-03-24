@@ -5,6 +5,7 @@ import {
   IsEnum,
   IsOptional,
   validateSync,
+  IsString,
 } from 'class-validator';
 
 enum NodeEnv {
@@ -25,6 +26,14 @@ class EnvironmentVariables {
   @IsUrl({ require_tld: false, protocols: ['mongodb'] })
   @IsOptional()
   MONGODB_URI: string = 'mongodb://localhost:27017/nestjs-playground';
+
+  @IsString()
+  @IsOptional()
+  REDIS_HOST: string = 'localhost';
+
+  @IsInt()
+  @IsOptional()
+  REDIS_PORT: number = 6379;
 }
 
 export default function validateEnv(config: Record<string, unknown>) {

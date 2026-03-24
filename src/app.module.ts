@@ -6,6 +6,7 @@ import appConfig from './config/app.config';
 import databaseConfig from './config/database.config';
 import { ScheduleModule } from '@nestjs/schedule';
 import validateEnv from './config/env.validator';
+import { BullModule } from '@nestjs/bullmq';
 
 @Module({
   imports: [
@@ -38,6 +39,14 @@ import validateEnv from './config/env.validator';
             );
             return connection;
           },
+        };
+      },
+      inject: [databaseConfig.KEY],
+    }),
+    BullModule.forRootAsync({
+      useFactory: ({ redis }: ConfigType<typeof databaseConfig>) => {
+        return {
+          connection: redis,
         };
       },
       inject: [databaseConfig.KEY],
